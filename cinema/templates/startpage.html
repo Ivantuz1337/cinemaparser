@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <header>
+      <h1>Dungeon masters</h1>
+    </header>
+    <main>
+      <ul class="movie-list">
+        {% for film in films %}
+          {% with img_src=film.3 film_name=film.0 film_alt_name=film.1 film_time=film.2 %}
+            <li class="movie">
+              <div class="movie-image">
+                <img src="{{ img_src }}" alt="">
+              </div>
+              <div class="movie-info">
+                <h2 class="movie-name">{{ film_name }}</h2>
+                <p class="movie-alt-name">{{ film_alt_name }}</p>
+                <p class="movie-time">{{ film_time }}</p>
+
+                <a href="{% url 'reservation' %}?bu" class="btn-reserve">Reserve seats</a>
+              </div>
+            </li>
+          {% endwith %}
+        {% endfor %}
+      </ul>
+    </main>
+    <footer>
+      <p>&copy; 2023 Cinema. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
